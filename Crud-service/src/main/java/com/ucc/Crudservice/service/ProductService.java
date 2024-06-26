@@ -54,4 +54,14 @@ public class ProductService {
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
     }
+
+    public ResponseEntity<Object> findByIdProduct(Long id) {
+        Optional<Product> existingProductOptional = productRepository.findById(id);
+        if (existingProductOptional.isPresent()) {
+            Product existingProduct = existingProductOptional.get();
+            return new ResponseEntity<>(existingProduct, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
+        }
+    }
 }

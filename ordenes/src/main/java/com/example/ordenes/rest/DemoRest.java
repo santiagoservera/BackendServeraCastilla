@@ -24,7 +24,7 @@ public class DemoRest {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    UserDetailsService usuarioDetailsService;
+    private UserDetailsService usuarioDetailsService;
 
     @Autowired
     private JwtUtilService jwtUtilService;
@@ -35,9 +35,14 @@ public class DemoRest {
     public ResponseEntity<TokenInfo> authenticate(@RequestBody AuthenticationReq authenticationReq) {
         logger.info("Autenticando al usuario {}", authenticationReq.getUsuario());
 
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(authenticationReq.getUsuario(), authenticationReq.getClave())
-        );
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(authenticationReq.getUsuario(), authenticationReq.getClave())
+            );
+        } catch (Exception e) {
+            logger.error("Error durante la autenticación", e);
+            return ResponseEntity.status(401).build();
+        }
 
         final UserDetails userDetails = usuarioDetailsService.loadUserByUsername(authenticationReq.getUsuario());
         final String jwt = jwtUtilService.generateToken(userDetails);

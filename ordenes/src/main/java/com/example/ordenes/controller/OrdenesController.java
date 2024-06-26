@@ -23,18 +23,21 @@ public class OrdenesController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<Ordenes> getOrders() {
+        System.out.println("Probando obtener orden");
         return ordenesService.getOrders();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Object> newOrder(@Valid @RequestBody Ordenes orden, BindingResult bindingResult) {
+        System.out.println("Probando crear orden");
         if (bindingResult.hasErrors()) {
             List<String> errors = bindingResult.getAllErrors().stream()
                     .map(DefaultMessageSourceResolvable::getDefaultMessage)
                     .collect(Collectors.toList());
             return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
         }
+
         return ordenesService.newOrder(orden);
     }
 

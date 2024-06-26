@@ -1,6 +1,5 @@
 package com.example.ordenes.security;
 
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -14,7 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
 
 @Service
 public class JwtUtilService {
@@ -34,7 +32,7 @@ public class JwtUtilService {
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
+        return Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody();
     }
 
     private Boolean isTokenExpired(String token) {
@@ -50,7 +48,6 @@ public class JwtUtilService {
     }
 
     private String createToken(Map<String, Object> claims, String subject) {
-
         return Jwts
                 .builder()
                 .setClaims(claims)
@@ -61,9 +58,14 @@ public class JwtUtilService {
                 .compact();
     }
 
+//    private String createToken(Map<String, Object> claims, String subject) {
+//        return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
+//                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
+//                .signWith(secretKey).compact();
+//    }
+
     public boolean validateToken(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
-
 }

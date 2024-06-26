@@ -36,7 +36,7 @@ public class OrdenesService {
     /*****************METODO PARA CREAR ORDEN*****************/
     public ResponseEntity<Object> newOrder(Ordenes orden) {
         Long productId = orden.getProductId();
-        String url = "http://localhost:8083/api/products/find/" + productId;
+        String url = "http://localhost:8083/api/products/" + productId;
 
         HttpHeaders headers = createHeaders("santi", "santi"); // Cambia esto según tus credenciales
         HttpEntity<String> entity = new HttpEntity<>(headers);
