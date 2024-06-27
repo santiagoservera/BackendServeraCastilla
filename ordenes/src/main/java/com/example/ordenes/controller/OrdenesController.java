@@ -19,14 +19,14 @@ import java.util.stream.Collectors;
 public class OrdenesController {
 
     private final OrdenesService ordenesService;
-
+//    Obtener ordenes
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<Ordenes> getOrders() {
         System.out.println("Probando obtener orden");
         return ordenesService.getOrders();
     }
-
+//    Crear ordenes
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Object> newOrder(@Valid @RequestBody Ordenes orden, BindingResult bindingResult) {
@@ -40,7 +40,7 @@ public class OrdenesController {
 
         return ordenesService.newOrder(orden);
     }
-
+//    Actualizar ordenes
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Object> updateOrder(@PathVariable("id") Long id, @Valid @RequestBody Ordenes updatedOrder, BindingResult bindingResult) {
@@ -52,7 +52,7 @@ public class OrdenesController {
         }
         return ordenesService.updateOrder(id, updatedOrder);
     }
-
+//    Eliminar ordenes
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Object> deleteOrder(@PathVariable("id") Long id) {

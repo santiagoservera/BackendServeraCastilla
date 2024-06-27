@@ -28,12 +28,12 @@ public class OrdenesService {
         }};
     }
 
-    /*****************METODO PARA OBTENER ORDENES*****************/
+//    Metodo para obtener ordenes
     public List<Ordenes> getOrders() {
         return ordenesRepository.findAll();
     }
 
-    /*****************METODO PARA CREAR ORDEN*****************/
+//    Metodo para crear ordenes
     public ResponseEntity<Object> newOrder(Ordenes orden) {
         Long productId = orden.getProductId();
         String url = "http://localhost:8083/api/products/" + productId;
@@ -57,8 +57,7 @@ public class OrdenesService {
             return new ResponseEntity<>("Product not found, order not created", HttpStatus.NOT_FOUND);
         }
     }
-
-    /*****************METODO PARA ELIMINAR ORDEN*****************/
+//    Metodo para eliminar ordenes mediante id
     public ResponseEntity<Object> deleteOrder(Long id) {
         Optional<Ordenes> existingOrderOptional = ordenesRepository.findById(id);
         if (existingOrderOptional.isPresent()) {
@@ -68,8 +67,7 @@ public class OrdenesService {
             return new ResponseEntity<>("Order not found", HttpStatus.NOT_FOUND);
         }
     }
-
-    /*****************METODO PARA ACTUALIZAR ORDEN*****************/
+//    Metodo para actualizar ordenes mediante id
     public ResponseEntity<Object> updateOrder(Long id, Ordenes updatedOrder) {
         Optional<Ordenes> existingOrderOptional = ordenesRepository.findById(id);
         if (existingOrderOptional.isPresent()) {
