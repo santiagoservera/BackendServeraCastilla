@@ -28,7 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public record Usuario(String username, String password, Set<String> roles) {}
 
     public static Usuario getById(String username) {
-        var password = "$2a$10$Q0UwtHlFenCtgiiyBW0I/.WmjE5s3TE.kIYOOh59lgdNPhyfrInie"; // 'santi' encriptado con BCrypt
+        var password = "$2a$10$TrPxNA15kwy8EZnj3q2C7uFghuMSeUVfjoWDNSn.uKxdATZXtsN7a"; // 'santi' encriptado con BCrypt
         Usuario axel = new Usuario("axel", password, Set.of("USER"));
         Usuario santi = new Usuario("santi", password, Set.of("ADMIN"));
         var usuarios = List.of(axel, santi);

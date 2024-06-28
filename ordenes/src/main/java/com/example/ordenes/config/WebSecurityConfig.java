@@ -50,12 +50,7 @@ public class WebSecurityConfig {
         return http.build();
     }
 
-//    private RequestMatcher publicEndpoints(){
-//        return new OrRequestMatcher(
-//                new AntPathRequestMatcher("/ordenes/**"),
-//                new AntPathRequestMatcher("/authenticate")
-//        );
-//    }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -65,5 +60,9 @@ public class WebSecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
+    }
+
+    public static void main(String[] args) {
+        System.out.println("pass: " + new BCryptPasswordEncoder().encode("santi"));
     }
 }

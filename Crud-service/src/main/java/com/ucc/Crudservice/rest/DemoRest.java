@@ -28,6 +28,7 @@ public class DemoRest {
 
     private static final Logger logger = LoggerFactory.getLogger(DemoRest.class);
 
+//    Ruta para generar el token al usuario
     @PostMapping("/authenticate")
     public ResponseEntity<TokenInfo> authenticate(@RequestBody AuthenticationReq authenticationReq) {
         logger.info("Autenticando al usuario {}", authenticationReq.getUsuario());
